@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditions Générales d'Utilisation - MyDiary Secure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+
+    <script>
+      // Configuration Tailwind pour le mode sombre
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#eff6ff",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen"
+  >
+    <!-- Header -->
+    <header
+      class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700"
+    >
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-lock text-white text-lg"></i>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                MyDiary Secure
+              </h1>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Conditions Générales d'Utilisation
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <!-- Bouton retour -->
+            <a
+              href="../index.html"
+              class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+            >
+              <i class="fas fa-arrow-left mr-2"></i>
+              Retour à l'app
+            </a>
+
+            <!-- Toggle mode sombre -->
+            <button
+              id="theme-toggle"
+              class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+            >
+              <i class="fas fa-moon dark:hidden"></i>
+              <i class="fas fa-sun hidden dark:inline"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div
+        class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
+      >
+        <div class="px-6 py-8 sm:px-8 sm:py-10">
+          <!-- En-tête du document -->
+          <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Conditions Générales d'Utilisation (CGU)
+            </h1>
+            <div
+              class="inline-flex items-center px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm"
+            >
+              <i class="fas fa-calendar-alt mr-2"></i>
+              <strong>Date de dernière mise à jour :</strong> 7 janvier 2025
+            </div>
+          </div>
+
+          <!-- Introduction -->
+          <div class="prose prose-gray dark:prose-invert max-w-none">
+            <p
+              class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+            >
+              Bienvenue sur MyDiary Secure, votre journal intime personnel
+              chiffré. En accédant à notre application et en l'utilisant, vous
+              acceptez d'être lié par les présentes Conditions Générales
+              d'Utilisation (CGU).
+            </p>
+
+            <!-- Section 1 -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >1</span
+                >
+                Acceptation des Conditions
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  L'accès et l'utilisation de l'application MyDiary Secure sont
+                  subordonnés à votre acceptation et au respect des présentes
+                  CGU. En créant un compte, vous reconnaissez avoir lu, compris
+                  et accepté d'être lié par l'intégralité de ces conditions.
+                </p>
+              </div>
+            </section>
+
+            <!-- Section Contact -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >📞</span
+                >
+                Contact
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  Pour toute question concernant les présentes Conditions
+                  Générales d'Utilisation :
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                  <a
+                    href="mailto:eltonhounnou27@gmail.com"
+                    class="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors duration-200"
+                  >
+                    <i
+                      class="fas fa-envelope text-blue-600 dark:text-blue-400 mr-3"
+                    ></i>
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">
+                        Email
+                      </div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">
+                        eltonhounnou27@gmail.com
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://wa.me/+22940663349"
+                    target="_blank"
+                    class="flex items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors duration-200"
+                  >
+                    <i
+                      class="fab fa-whatsapp text-green-600 dark:text-green-400 mr-3"
+                    ></i>
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">
+                        WhatsApp
+                      </div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">
+                        +229 40 66 33 49
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://github.com/REBCDR07/mydiary-secure"
+                    target="_blank"
+                    class="flex items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    <i
+                      class="fab fa-github text-gray-600 dark:text-gray-400 mr-3"
+                    ></i>
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">
+                        GitHub
+                      </div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">
+                        Créer un ticket
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Script pour le mode sombre -->
+    <script>
+      // Gestion du mode sombre
+      const themeToggle = document.getElementById("theme-toggle");
+      const html = document.documentElement;
+
+      // Charger le thème sauvegardé
+      const savedTheme = localStorage.getItem("theme") || "light";
+      html.classList.toggle("dark", savedTheme === "dark");
+
+      themeToggle.addEventListener("click", () => {
+        const isDark = html.classList.contains("dark");
+        html.classList.toggle("dark", !isDark);
+        localStorage.setItem("theme", !isDark ? "dark" : "light");
+      });
+    </script>
+  </body>
+</html>

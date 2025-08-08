@@ -1,8 +1,8 @@
 // MyDiary Secure - Script principal avec intégration Supabase
 // Version: 2.0.0
 
-// Configuration de l'application
-const CONFIG = {
+// Configuration de l'application (éviter le conflit avec d'autres scripts)
+const APP_CONFIG = {
   APP_NAME: "MyDiary Secure",
   VERSION: "2.0.0",
   MOOD_EMOJIS: {
@@ -257,12 +257,12 @@ const utils = {
 
   // Obtenir l'emoji d'humeur
   getMoodEmoji: (mood) => {
-    return CONFIG.MOOD_EMOJIS[mood] || "❓";
+    return APP_CONFIG.MOOD_EMOJIS[mood] || "❓";
   },
 
   // Obtenir le nom d'humeur
   getMoodName: (mood) => {
-    return CONFIG.MOOD_NAMES[mood] || "Inconnu";
+    return APP_CONFIG.MOOD_NAMES[mood] || "Inconnu";
   },
 
   // Valider l'email
