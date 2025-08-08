@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="title" content="MyDiary Secure">
+<meta name="description" content="MyDiary Secure est une application web moderne et sécurisée qui vous permet de tenir un journal intime personnel avec un chiffrement de bout en bout. Vos pensées, émotions et souvenirs restent privés et sécurisés, accessibles uniquement par vous.">
+<meta name="keywords" content="journal intime, confidentialité, sécurité">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="language" content="French">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MyDiary Secure - Journal Intime Personnel Chiffré</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Supabase SDK -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&family=Indie+Flower&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="/styles/style.css" />
+        <link rel="stylesheet" href="/styles/main.css" />
+        <script src="/js/tailwind.js"></script>
+
+        <!-- Supabase SDK -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    </head>
+
+    <body class="h-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 transition-all duration-500">
+        <div id="app" class="min-h-full flex flex-col">
+            <!-- écran de chargement -->
+            <div id="loading-screen" class="fixed inset-0 bg-gradient-to-br from-white via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 flex items-center justify-center z-50">
+                <div class="text-center">
+                    <div class="animate-bounce-in text-6xl mb-6">
+                        <i class="fas fa-lock text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600"></i>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+                        MyDiary Secure
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        Chargement de votre journal sécurisé...
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authentification -->
+            <div id="auth-screen" class="hidden min-h-screen flex items-center justify-center p-4">
+                <div class="w-full max-w-md">
+                    <!-- connexion -->
+                    <div id="login-form-container" class="card-enhanced rounded-2xl shadow-2xl overflow-hidden animate-slide-in">
+                        <div class="p-8">
+                            <div class="text-center mb-8">
+                                <div class="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fas fa-lock text-white text-xl"></i>
+                                </div>
+                                <h2 class="text-3xl font-bold text-gray-800 dark:text-white">
+                                    Connexion
+                                </h2>
+                                <p class="text-gray-600 dark:text-gray-300 mt-2">
+                                    Accédez à votre journal sécurisé
+                                </p>
+                            </div>
+
+                            <form id="login-form" class="space-y-6">
+                                <div>
+                                    <label for="login-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                                    <input type="email" id="login-email" required placeholder="votre@email.com" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                                </div>
+
+                                <div>
+                                    <label for="login-username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nom d'utilisateur</label>
+                                    <input type="text" id="login-username" required placeholder="Votre nom d'utilisateur" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                                </div>
+
+                                <div>
+                                    <label for="login-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mot de passe</label>
+                                    <div class="relative">
+                                        <input type="password" id="login-password" required class="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                                        <button type="button" class="absolute right-3 top-3.5 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors duration-200" id="toggle-login-password">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="w-full btn-primary text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-sign-in-alt mr-2"></i> Se connecter
+                                    </button>
+                                </div>
+
+                                <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+                                    Pas encore de compte?
+                                    <button type="button" id="show-register" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                                        S'inscrire
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- inscription -->
+                    <div id="register-form-container" class="hidden card-enhanced rounded-2xl shadow-2xl overflow-hidden animate-slide-in">
+                        <div class="p-8">
+                            <div class="text-center mb-8">
+                                <div class="mx-auto w-16 h-16 bg-gradient-to-r from-green-500 to-blue-600 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fas fa-user-plus text-white text-xl"></i>
+                                </div>
+                                <h2 class="text-3xl font-bold text-gray-800 dark:text-white">
+                                    Inscription
+                                </h2>
+                                <p class="text-gray-600 dark:text-gray-300 mt-2">
+                                    Créez votre journal sécurisé
+                                </p>
+                            </div>
+
+                            <form id="register-form" class="space-y-6">
+                                <div>
+                                    <label for="register-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                                    <input type="email" id="register-email" required placeholder="votre@email.com" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                                </div>
+
+                                <div>
+                                    <label for="register-username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nom d'utilisateur</label>
+                                    <input type="text" id="register-username" required minlength="3" placeholder="Votre nom d'utilisateur" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                                </div>
+
+                                <div>
+                                    <label for="register-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mot de passe</label>
+                                    <div class="relative">
+                                        <input type="password" id="register-password" required minlength="8" class="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                                        <button type="button" class="absolute right-3 top-3.5 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors duration-200" id="toggle-register-password">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <p id="password-requirements" class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                        Le mot de passe doit contenir au moins 8 caractères
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <label for="confirm-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirmer le mot de passe</label>
+                                    <div class="relative">
+                                        <input type="password" id="confirm-password" required minlength="8" class="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                                        <button type="button" class="absolute right-3 top-3.5 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors duration-200" id="toggle-confirm-password">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <p id="password-match" class="mt-2 text-xs text-red-500 hidden">
+                                        Les mots de passe ne correspondent pas
+                                    </p>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="terms-agreement" required class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                    <label for="terms-agreement" class="ml-3 text-sm text-gray-700 dark:text-gray-300">
+                                        J'accepte les conditions d'utilisation du<a href="/gdu/indexx.html" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                                            MDS</a>
+                                    </label>
+                                </div>
+
+                                <div class="flex space-x-4">
+                                    <button type="button" id="show-login" class="flex-1 btn-secondary text-gray-800 dark:text-white font-medium py-3 px-4 rounded-xl">
+                                        Retour
+                                    </button>
+                                    <button type="submit" class="flex-1 btn-primary text-white font-medium py-3 px-4 rounded-xl">
+                                        S'inscrire
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- tableau de bord personnel -->
+            <div id="dashboard-screen" class="hidden flex-1">
+                <!-- navbar -->
+                <nav class="glass sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between h-16">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 flex items-center">
+                                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-lock text-white text-sm"></i>
+                                    </div>
+                                    <span class="text-xl font-bold text-gray-900 dark:text-white">MyDiary Secure</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <button type="button" id="theme-toggle" class="p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">
+                                    <i class="fas fa-moon dark:hidden text-lg"></i>
+                                    <i class="fas fa-sun hidden dark:block text-lg"></i>
+                                </button>
+                                <button type="button" id="logout-btn" class="p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-900 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200">
+                                    <i class="fas fa-sign-out-alt text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- accueil -->
+                <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <!-- section d'acceuil -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                            Bienvenue dans votre journal
+                        </h1>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Exprimez, écrivez et enregistrez vos pensées et suivez votre
+                            humeur en toute sécurité. Votre Journal Intime à porter de main.
+                        </p>
+                    </div>
+
+                    <!-- statistiques -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="card-enhanced rounded-2xl p-6 border-l-4 border-blue-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                        Total Entrées
+                                    </p>
+                                    <p id="total-entries" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                        0
+                                    </p>
+                                </div>
+                                <div class="p-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                                    <i class="fas fa-book-open text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-enhanced rounded-2xl p-6 border-l-4 border-green-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                        Série d'écriture
+                                    </p>
+                                    <p id="writing-streak" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                        0 jours
+                                    </p>
+                                </div>
+                                <div class="p-3 rounded-full bg-gradient-to-r from-green-500 to-green-600 text-white">
+                                    <i class="fas fa-fire text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-enhanced rounded-2xl p-6 border-l-4 border-yellow-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                        Humeur moyenne
+                                    </p>
+                                    <p id="average-mood" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                        😊
+                                    </p>
+                                </div>
+                                <div class="p-3 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white">
+                                    <i class="fas fa-smile text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-enhanced rounded-2xl p-6 border-l-4 border-purple-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                        Entrées de ce mois
+                                    </p>
+                                    <p id="month-entries" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                        0
+                                    </p>
+                                </div>
+                                <div class="p-3 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 text-white">
+                                    <i class="fas fa-calendar-alt text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- actions -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <button type="button" id="new-entry-btn" class="card-enhanced rounded-2xl p-8 text-left hover:scale-105 transition-all duration-300 group">
+                            <div class="flex items-center">
+                                <div class="p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white mr-6 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-plus text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                        Nouvelle entrée
+                                    </h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Écrivez vos pensées du moment
+                                    </p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button type="button" id="view-entries-btn" class="card-enhanced rounded-2xl p-8 text-left hover:scale-105 transition-all duration-300 group">
+                            <div class="flex items-center">
+                                <div class="p-4 rounded-full bg-gradient-to-r from-green-500 to-teal-600 text-white mr-6 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-list text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                        Mes entrées
+                                    </h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Consultez votre journal
+                                    </p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- entrées récentes -->
+                    <div class="card-enhanced rounded-2xl p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">
+                            Entrées récentes
+                        </h2>
+                        <div id="recent-entries" class="space-y-4">
+                            <div class="text-center py-12">
+                                <i class="fas fa-book-open text-4xl text-gray-400 dark:text-gray-600 mb-4"></i>
+                                <p class="text-gray-500 dark:text-gray-400">
+                                    Aucune entrée pour le moment
+                                </p>
+                                <button type="button" id="create-first-entry" class="mt-4 btn-primary text-white px-6 py-2 rounded-xl">
+                                    Créer votre première entrée
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- page d'entrée -->
+            <div id="write-entry-screen" class="hidden flex-1">
+                <!-- nav -->
+                <nav class="glass sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between h-16">
+                            <div class="flex items-center">
+                                <button type="button" id="back-to-dashboard" class="mr-4 p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">
+                                    <i class="fas fa-arrow-left text-lg"></i>
+                                </button>
+                                <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                                    Nouvelle entrée
+                                </h1>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <button type="button" id="preview-entry" class="btn-secondary text-gray-800 dark:text-white px-4 py-2 rounded-xl">
+                                    <i class="fas fa-eye mr-2"></i> Aperçu
+                                </button>
+                                <button type="button" id="theme-toggle-write" class="p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">
+                                    <i class="fas fa-moon dark:hidden text-lg"></i>
+                                    <i class="fas fa-sun hidden dark:block text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- écriture d'entrée -->
+                <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <form id="entry-form" class="space-y-6">
+                        <div class="card-enhanced rounded-2xl p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="entry-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Titre de l'entrée</label>
+                                    <input type="text" id="entry-title" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" placeholder="Donnez un titre à votre entrée..." />
+                                </div>
+
+                                <div>
+                                    <label for="entry-mood" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Humeur</label>
+                                    <select id="entry-mood" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400">
+                                        <option value="">Choississez votre humeur</option>
+                                        <option value="happy">😊 Heureux</option>
+                                        <option value="sad">😢 Triste</option>
+                                        <option value="neutral">😐 Neutre</option>
+                                        <option value="excited">😃 Excité</option>
+                                        <option value="angry">😠 En colère</option>
+                                        <option value="anxious">😰 Anxieux</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="entry-font" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Style d'écriture</label>
+                                    <select id="entry-font" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400">
+                                        <option value="font-inter">Inter (par défaut)</option>
+                                        <option value="font-roboto">Roboto Slab (élégant)</option>
+                                        <option value="font-indie">Indie Flower (manuscrit)</option>
+                                        <option value="font-mono">Monospace (technique)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="entry-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mot de passe (optionnel)</label>
+                                    <div class="relative">
+                                        <input type="password" id="entry-password" class="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" placeholder="Protégez cette entrée en lui attribuant un mot de passe secret..." />
+                                        <button type="button" class="absolute right-3 top-3.5 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors duration-200" id="toggle-entry-password">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="entry-content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Contenu</label>
+                                <textarea id="entry-content" required rows="12" class="entry-content w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white resize-none transition-all duration-200 hover:border-blue-400" placeholder="Exprimez vos pensées, vos sentiments, vos expériences..."></textarea>
+                            </div>
+
+                            <div class="flex justify-end space-x-4 pt-6">
+                                <button type="button" id="cancel-entry" class="btn-secondary text-gray-800 dark:text-white px-6 py-3 rounded-xl">
+                                    Annuler
+                                </button>
+                                <button type="submit" class="btn-primary text-white px-6 py-3 rounded-xl">
+                                    <i class="fas fa-save mr-2"></i> Sauvegarder
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </main>
+            </div>
+
+            <!-- écréan listes des  entrées -->
+            <div id="entries-list-screen" class="hidden flex-1">
+                <!-- nav -->
+                <nav class="glass sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between h-16">
+                            <div class="flex items-center">
+                                <button type="button" id="back-to-dashboard-from-list" class="mr-4 p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">
+                                    <i class="fas fa-arrow-left text-lg"></i>
+                                </button>
+                                <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                                    Mes entrées
+                                </h1>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <button type="button" id="theme-toggle-list" class="p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">
+                                    <i class="fas fa-moon dark:hidden text-lg"></i>
+                                    <i class="fas fa-sun hidden dark:block text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- listes des entrées -->
+                <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <!-- recherche & filtration -->
+                    <div class="card-enhanced rounded-2xl p-6 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="search-entries" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rechercher</label>
+                                <div class="relative">
+                                    <input type="text" id="search-entries" class="w-full px-4 py-3 pl-10 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" placeholder="Rechercher dans vos entrées..." />
+                                    <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="filter-mood" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filtrer par humeur</label>
+                                <select id="filter-mood" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400">
+                                    <option value="">Toutes les humeurs</option>
+                                    <option value="happy">😊 Heureux</option>
+                                    <option value="sad">😢 Triste</option>
+                                    <option value="neutral">😐 Neutre</option>
+                                    <option value="excited">😃 Excité</option>
+                                    <option value="angry">😠 En colère</option>
+                                    <option value="anxious">😰 Anxieux</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- contenu d'entrée -->
+                    <div id="entries-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- espace d'entrée -->
+                    </div>
+
+                    <!-- si pas encore d'entrée -->
+                    <div id="no-entries-message" class="hidden text-center py-16">
+                        <i class="fas fa-book-open text-6xl text-gray-400 dark:text-gray-600 mb-6"></i>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                            Aucune entrée trouvée
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            Commencez à écrire votre journal dès maintenant
+                        </p>
+                        <button type="button" id="create-first-entry-from-list" class="btn-primary text-white px-6 py-3 rounded-xl">
+                            <i class="fas fa-plus mr-2"></i> Créer votre première entrée
+                        </button>
+                    </div>
+                </main>
+            </div>
+
+            <!-- mode vue -->
+            <div id="preview-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                <div class="card-enhanced rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden animate-bounce-in">
+                    <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                                Aperçu de l'entrée
+                            </h3>
+                            <button type="button" id="close-preview" class="p-2 rounded-xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">
+                                <i class="fas fa-times text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6 overflow-y-auto max-h-[70vh]">
+                        <div class="mb-4">
+                            <h4 id="preview-title" class="text-2xl font-bold text-gray-900 dark:text-white mb-2"></h4>
+                            <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                                <span id="preview-mood" class="flex items-center">
+                                    <span class="mr-2">😊</span> Heureux
+                                </span>
+                                <span id="preview-date"></span>
+                            </div>
+                        </div>
+                        <div id="preview-content" class="prose dark:prose-invert max-w-none"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- mode de sécurité -->
+            <div id="password-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                <div class="card-enhanced rounded-2xl max-w-md w-full p-6 animate-bounce-in">
+                    <div class="text-center mb-6">
+                        <div class="mx-auto w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-lock text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                            Entrée sécurisée
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mt-2">
+                            Veuillez entrer le mot de passe pour accéder à cette entrée
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="entry-password-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mot de passe</label>
+                        <div class="relative">
+                            <input type="password" id="entry-password-input" class="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200 hover:border-blue-400" />
+                            <button type="button" class="absolute right-3 top-3.5 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition-colors duration-200" id="toggle-modal-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <p id="password-error" class="mt-2 text-xs text-red-500 hidden">
+                            Mot de passe incorrect
+                        </p>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <button type="button" id="cancel-password" class="flex-1 btn-secondary text-gray-800 dark:text-white font-medium py-3 px-4 rounded-xl">
+                            Annuler
+                        </button>
+                        <button type="button" id="unlock-entry" class="flex-1 btn-primary text-white font-medium py-3 px-4 rounded-xl">
+                            Déverrouiller
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- notification -->
+            <div id="toast-notification" class="hidden fixed bottom-4 right-4 z-50">
+                <div class="card-enhanced rounded-xl overflow-hidden w-80 border-l-4 border-blue-500 animate-slide-up">
+                    <div class="p-4 flex items-start">
+                        <div id="toast-icon" class="flex-shrink-0 text-blue-500 mr-3">
+                            <i class="fas fa-info-circle text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 id="toast-title" class="font-medium text-gray-900 dark:text-white"></h4>
+                            <p id="toast-message" class="mt-1 text-sm text-gray-500 dark:text-gray-400"></p>
+                        </div>
+                        <button type="button" id="close-toast" class="ml-4 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/script.js"></script>
+
+        <!-- Loader d'environnement (doit être chargé en premier) -->
+        <script src="/js/env-loader.js"></script>
+
+        <!-- footer -->
+        <footer class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 py-8 mt-auto border-t border-gray-200 dark:border-gray-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+                    <!-- à propos du MDS -->
+                    <div class="text-center md:text-left">
+                        <div class="flex items-center justify-center md:justify-start mb-3">
+                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-lock text-white text-sm"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                                MyDiary Secure
+                            </h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Votre journal intime personnel avec chiffrement de bout en bout
+                            pour une confidentialité totale.
+                        </p>
+                    </div>
+
+                    <!-- conditions d'utilisation du MDS -->
+                    <div class="text-center">
+                        <h4 class="text-md font-semibold text-gray-900 dark:text-white mb-3">
+                            Liens utiles
+                        </h4>
+                        <div class="space-y-2">
+                            <a href="/gdu/indexx.html" target="_blank" class="block text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 text-sm">
+                                <i class="fas fa-file-contract mr-2"></i>Conditions
+                                d'Utilisation
+                            </a>
+                        </div>
+                    </div>
+
+                    <!--  réseaux sociaux -->
+                    <div class="text-center md:text-right">
+                        <h4 class="text-md font-semibold text-gray-900 dark:text-white mb-3">
+                            Suivez-moi
+                        </h4>
+                        <div class="flex justify-center md:justify-end space-x-4">
+                            <!-- Facebook -->
+                            <a href="https://facebook.com/eltonhounnou" target="_blank" rel="noopener noreferrer" class="group w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <i class="fab fa-facebook-f text-white text-sm group-hover:scale-110 transition-transform duration-200"></i>
+                            </a>
+
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/+22940663349" target="_blank" rel="noopener noreferrer" class="group w-10 h-10 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <i class="fab fa-whatsapp text-white text-sm group-hover:scale-110 transition-transform duration-200"></i>
+                            </a>
+
+                            <!-- GitHub -->
+                            <a href="https://github.com/REBCDR07" target="_blank" rel="noopener noreferrer" class="group w-10 h-10 bg-gray-800 hover:bg-gray-900 dark:bg-gray-600 dark:hover:bg-gray-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <i class="fab fa-github text-white text-sm group-hover:scale-110 transition-transform duration-200"></i>
+                            </a>
+
+                            <!-- LinkedIn -->
+                            <a href="https://linkedin.com/in/elton-hounnou27" target="_blank" rel="noopener noreferrer" class="group w-10 h-10 bg-blue-700 hover:bg-blue-800 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                                <i class="fab fa-linkedin-in text-white text-sm group-hover:scale-110 transition-transform duration-200"></i>
+                            </a>
+                        </div>
+
+                        <!-- contact -->
+                        <p class="text-gray-600 dark:text-gray-400 text-xs mt-3">
+                            Contactez-moi pour toute question ou suggestion via nos canaux
+                            sociaux ci-dessus.
+                        </p>
+                    </div>
+                </div>
+
+                <hr class="border-gray-300 dark:border-gray-600 mb-4" />
+
+                <!-- copyright -->
+                <div class="flex flex-col md:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
+                    <div class="mb-2 md:mb-0">
+                        <p>© 2025 MyDiary Secure. Tous droits réservés.</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span>Développé avec</span>
+                        <i class="fas fa-heart text-red-500 mx-1 animate-pulse"></i>
+                        <span>par
+                            <strong class="text-blue-600 dark:text-blue-400"><strong><em>ELTON</em></strong></strong></span>
+                    </div>
+                </div>
+
+                <!-- Version et dernière mise à jour -->
+                <div class="text-center mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <p class="text-xs text-gray-500 dark:text-gray-500">
+                        Version 2.0 • Dernière mise à jour : 3 août 2025
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts Supabase -->
+        <script src="/js/supabase-config.js"></script>
+        <script src="/js/supabase-auth.js"></script>
+        <script src="/js/supabase-data.js"></script>
+
+        <!-- Script principal mis à jour avec Supabase -->
+        <script src="/js/script-supabase.js"></script>
+
+        <script>
+            // Initialisation de l'application avec chargement des variables d'environnement
+            document.addEventListener("DOMContentLoaded", async () => {
+              try {
+                console.log("🚀 Démarrage de MyDiary Secure...");
+                
+                // 1. Charger les variables d'environnement
+                await window.envLoader.load();
+                console.log("✅ Variables d'environnement chargées");
+                
+                // 2. Initialiser le thème
+                themeManager.init();
+                console.log("✅ Thème initialisé");
+            
+                // 3. Initialiser Supabase avec la configuration d'environnement
+                const supabaseInitialized = await initSupabase();
+                if (!supabaseInitialized) {
+                  throw new Error("Échec de l'initialisation Supabase");
+                }
+                console.log("✅ Supabase initialisé");
+            
+                // 4. Initialiser l'authentification Supabase
+                await supabaseAuth.init();
+                console.log("✅ Authentification initialisée");
+            
+                // 5. Vérifier si l'utilisateur est connecté
+                if (supabaseAuth.isAuthenticated()) {
+                  console.log("👤 Utilisateur déjà connecté");
+                  screenManager.showDashboard();
+                } else {
+                  console.log("🔐 Utilisateur non connecté");
+                  screenManager.showAuth();
+                }
+            
+                // 6. Initialiser les gestionnaires
+                authManager.init();
+                entryManager.init();
+                entriesManager.init();
+                dashboardManager.init();
+                console.log("✅ Gestionnaires initialisés");
+            
+                // 7. Masquer l'écran de chargement
+                setTimeout(() => {
+                  elements.loadingScreen.classList.add("hidden");
+                  console.log("✅ Application prête !");
+                }, 1500);
+                
+              } catch (error) {
+                console.error("❌ Erreur d'initialisation:", error);
+                utils.showNotification(
+                  "Erreur",
+                  "Erreur lors de l'initialisation de l'application: " + error.message,
+                  "error"
+                );
+                screenManager.showAuth();
+                elements.loadingScreen.classList.add("hidden");
+              }
+            });
+        </script>
+    </body>
+
+</html>

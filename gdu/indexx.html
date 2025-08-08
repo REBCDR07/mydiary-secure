@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditions Générales d'Utilisation - MyDiary Secure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+
+    <script>
+      // Configuration Tailwind pour le mode sombre
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#eff6ff",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen"
+  >
+    <!-- Header -->
+    <header
+      class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700"
+    >
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-lock text-white text-lg"></i>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                MyDiary Secure
+              </h1>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Conditions Générales d'Utilisation
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <!-- Bouton retour -->
+            <a
+              href="../index.html"
+              class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+            >
+              <i class="fas fa-arrow-left mr-2"></i>
+              Retour à l'app
+            </a>
+
+            <!-- Toggle mode sombre -->
+            <button
+              id="theme-toggle"
+              class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+            >
+              <i class="fas fa-moon dark:hidden"></i>
+              <i class="fas fa-sun hidden dark:inline"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div
+        class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
+      >
+        <div class="px-6 py-8 sm:px-8 sm:py-10">
+          <!-- En-tête du document -->
+          <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Conditions Générales d'Utilisation (CGU)
+            </h1>
+            <div
+              class="inline-flex items-center px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm"
+            >
+              <i class="fas fa-calendar-alt mr-2"></i>
+              <strong>Date de dernière mise à jour :</strong> 3 août 2025
+            </div>
+          </div>
+
+          <!-- Introduction -->
+          <div class="prose prose-gray dark:prose-invert max-w-none">
+            <p
+              class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+            >
+              Bienvenue sur MyDiary Secure, votre journal intime personnel
+              chiffré. En accédant à notre application et en l'utilisant, vous
+              acceptez d'être lié par les présentes Conditions Générales
+              d'Utilisation (CGU). Veuillez les lire attentivement et les
+              comprendre avant toute utilisation de nos services.
+            </p>
+
+            <!-- Section 1 -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >1</span
+                >
+                Acceptation des Conditions
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  L'accès et l'utilisation de l'application MyDiary Secure sont
+                  subordonnés à votre acceptation et au respect des présentes
+                  CGU. En créant un compte, en vous connectant ou en utilisant
+                  de quelque manière que ce soit l'application, vous
+                  reconnaissez avoir lu, compris et accepté d'être lié par
+                  l'intégralité de ces conditions. Si vous n'acceptez pas tout
+                  ou partie de ces CGU, vous ne devez pas utiliser l'application
+                  MyDiary Secure.
+                </p>
+                <p>
+                  Nous nous réservons le droit de modifier ou de remplacer ces
+                  CGU à tout moment, à notre seule discrétion. En cas de
+                  modification substantielle, nous nous efforcerons de vous en
+                  informer par des moyens raisonnables, tels qu'une notification
+                  au sein de l'application ou par e-mail. Votre utilisation
+                  continue de l'application après la publication de toute
+                  modification des CGU constitue votre acceptation de ces
+                  modifications. Il est de votre responsabilité de consulter
+                  régulièrement les présentes CGU pour prendre connaissance des
+                  mises à jour.
+                </p>
+              </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >2</span
+                >
+                Description du Service
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  MyDiary Secure est une application web innovante conçue pour
+                  vous offrir un espace personnel et sécurisé où vous pouvez
+                  consigner vos pensées, vos émotions et vos expériences
+                  quotidiennes. Le service inclut, sans s'y limiter, les
+                  fonctionnalités suivantes :
+                </p>
+                <ul class="space-y-2 ml-4">
+                  <li class="flex items-start">
+                    <i class="fas fa-edit text-blue-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Création et Gestion d'Entrées :</strong>
+                      Possibilité de rédiger, modifier, consulter et organiser
+                      vos entrées de journal de manière intuitive.
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-shield-alt text-green-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Chiffrement de Bout en Bout :</strong> Toutes vos
+                      données sont chiffrées localement sur votre appareil,
+                      garantissant que seul vous, en possession de votre mot de
+                      passe, pouvez y accéder. Nous n'avons aucun accès à vos
+                      données en clair.
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-chart-line text-purple-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Suivi d'Humeur et Statistiques :</strong> Outils
+                      intégrés pour classifier vos émotions et visualiser des
+                      statistiques agrégées sur votre bien-être émotionnel au
+                      fil du temps.
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-palette text-pink-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Personnalisation de l'Interface :</strong>
+                      Basculement entre un mode sombre et un mode clair pour une
+                      expérience visuelle adaptée à vos préférences et à
+                      l'environnement d'utilisation.
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-database text-indigo-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Stockage Sécurisé des Données :</strong> Vos
+                      informations sont stockées de manière chiffrée dans une
+                      base de données sécurisée, accessible uniquement avec vos
+                      identifiants.
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-mobile-alt text-orange-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Design Responsive :</strong> Une interface
+                      utilisateur optimisée pour une expérience fluide et
+                      cohérente sur une multitude d'appareils, des smartphones
+                      aux ordinateurs de bureau.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >3</span
+                >
+                Confidentialité et Sécurité des Données
+              </h2>
+              <div class="pl-11 space-y-6 text-gray-700 dark:text-gray-300">
+                <p>
+                  La protection de votre vie privée et la sécurité de vos
+                  données sont nos priorités absolues. MyDiary Secure est conçu
+                  avec des principes de confidentialité dès la conception.
+                </p>
+
+                <div>
+                  <h3
+                    class="text-lg font-semibold text-gray-900 dark:text-white mb-3"
+                  >
+                    3.1 Chiffrement des Données
+                  </h3>
+                  <p>
+                    Toutes les entrées de journal que vous créez sont soumises à
+                    un processus de chiffrement robuste. Nous utilisons des
+                    algorithmes de chiffrement de pointe, notamment AES-256-GCM,
+                    avec une dérivation de clé sécurisée via PBKDF2
+                    (Password-Based Key Derivation Function 2) avec un nombre
+                    élevé d'itérations pour renforcer la résistance aux attaques
+                    par force brute. Votre mot de passe est la clé de ce
+                    chiffrement ; sans lui, vos données restent inaccessibles.
+                  </p>
+                </div>
+
+                <div>
+                  <h3
+                    class="text-lg font-semibold text-gray-900 dark:text-white mb-3"
+                  >
+                    3.2 Stockage Sécurisé
+                  </h3>
+                  <p>
+                    Vos données chiffrées sont stockées dans une base de données
+                    sécurisée avec des mesures de protection avancées. Cette
+                    architecture garantit un contrôle maximal sur vos données
+                    tout en offrant une accessibilité depuis n'importe quel
+                    appareil avec vos identifiants.
+                  </p>
+                </div>
+
+                <div>
+                  <h3
+                    class="text-lg font-semibold text-gray-900 dark:text-white mb-3"
+                  >
+                    3.3 Responsabilité de l'Utilisateur
+                  </h3>
+                  <p>
+                    Étant donné la nature du chiffrement, vous êtes responsable
+                    de la gestion de vos identifiants. MyDiary Secure ne peut
+                    être tenu responsable de la perte d'accès à vos données dans
+                    les circonstances suivantes :
+                  </p>
+                  <ul class="mt-3 space-y-2 ml-4">
+                    <li class="flex items-start">
+                      <i
+                        class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-3"
+                      ></i>
+                      <strong>Oubli ou Perte de Mot de Passe :</strong> Sans
+                      votre mot de passe, vos données chiffrées sont
+                      irrécupérables.
+                    </li>
+                    <li class="flex items-start">
+                      <i
+                        class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-3"
+                      ></i>
+                      <strong>Accès Non Autorisé :</strong> Vous êtes
+                      responsable de la sécurité de vos identifiants.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >4</span
+                >
+                Obligations de l'Utilisateur
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  En utilisant MyDiary Secure, vous vous engagez à respecter les
+                  obligations suivantes :
+                </p>
+                <ul class="space-y-3 ml-4">
+                  <li class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Exactitude des Informations :</strong> Vous
+                      garantissez que toutes les informations que vous
+                      fournissez lors de l'inscription ou de l'utilisation de
+                      l'application sont exactes, complètes et à jour.
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-key text-blue-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Confidentialité du Mot de Passe :</strong> Vous
+                      êtes seul responsable de la confidentialité de votre mot
+                      de passe et de toutes les activités qui se produisent sous
+                      votre compte.
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-gavel text-purple-500 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Utilisation Légale et Éthique :</strong> Vous vous
+                      engagez à utiliser l'application uniquement à des fins
+                      légales et conformément aux présentes CGU.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >5</span
+                >
+                Propriété Intellectuelle
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  L'application MyDiary Secure, y compris, mais sans s'y
+                  limiter, son code source, son design, ses interfaces
+                  utilisateur, ses textes, graphiques, logos, icônes, images, et
+                  tous les logiciels utilisés dans l'application, sont la
+                  propriété exclusive de MyDiary Secure et sont protégés par les
+                  lois internationales sur le droit d'auteur, les marques de
+                  commerce, les brevets, les secrets commerciaux et autres
+                  droits de propriété intellectuelle.
+                </p>
+              </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >6</span
+                >
+                Limitation de Responsabilité
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  MyDiary Secure est fourni "tel quel" et "tel que disponible",
+                  sans aucune garantie d'aucune sorte, expresse ou implicite.
+                  Dans toute la mesure permise par la loi applicable, MyDiary
+                  Secure ne sera en aucun cas responsable des dommages directs,
+                  indirects, accessoires, spéciaux, consécutifs ou exemplaires.
+                </p>
+              </div>
+            </section>
+
+            <!-- Section Contact -->
+            <section class="mb-8">
+              <h2
+                class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <span
+                  class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-bold mr-3"
+                  >📞</span
+                >
+                Contact
+              </h2>
+              <div class="pl-11 space-y-4 text-gray-700 dark:text-gray-300">
+                <p>
+                  Pour toute question, préoccupation ou demande d'informations
+                  supplémentaires concernant les présentes Conditions Générales
+                  d'Utilisation, veuillez nous contacter :
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                  <a
+                    href="mailto:eltonhounnou27@gmail.com"
+                    class="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors duration-200"
+                  >
+                    <i
+                      class="fas fa-envelope text-blue-600 dark:text-blue-400 mr-3"
+                    ></i>
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">
+                        Email
+                      </div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">
+                        eltonhounnou27@gmail.com
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://wa.me/+22940663349"
+                    target="_blank"
+                    class="flex items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors duration-200"
+                  >
+                    <i
+                      class="fab fa-whatsapp text-green-600 dark:text-green-400 mr-3"
+                    ></i>
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">
+                        WhatsApp
+                      </div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">
+                        +229 40 66 33 49
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://github.com/REBCDR07/mydiary-secure"
+                    target="_blank"
+                    class="flex items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    <i
+                      class="fab fa-github text-gray-600 dark:text-gray-400 mr-3"
+                    ></i>
+                    <div>
+                      <div class="font-medium text-gray-900 dark:text-white">
+                        GitHub
+                      </div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">
+                        Créer un ticket
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Footer du document -->
+          <div class="border-t border-gray-200 dark:border-gray-700 pt-8 mt-8">
+            <div class="text-center">
+              <div class="flex items-center justify-center mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-lock text-white text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                    MyDiary Secure
+                  </h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Votre confidentialité, notre engagement.
+                  </p>
+                </div>
+              </div>
+              <p class="text-xs text-gray-500 dark:text-gray-400 italic">
+                Ce document a été rédigé avec l'assistance de Manus AI pour
+                garantir sa clarté et sa complétude.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Script pour le mode sombre -->
+    <script>
+      // Gestion du mode sombre
+      const themeToggle = document.getElementById("theme-toggle");
+      const html = document.documentElement;
+
+      // Charger le thème sauvegardé
+      const savedTheme = localStorage.getItem("theme") || "light";
+      html.classList.toggle("dark", savedTheme === "dark");
+
+      themeToggle.addEventListener("click", () => {
+        const isDark = html.classList.contains("dark");
+        html.classList.toggle("dark", !isDark);
+        localStorage.setItem("theme", !isDark ? "dark" : "light");
+      });
+
+      // Animation d'entrée
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section, index) => {
+          section.style.opacity = "0";
+          section.style.transform = "translateY(20px)";
+          setTimeout(() => {
+            section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            section.style.opacity = "1";
+            section.style.transform = "translateY(0)";
+          }, index * 100);
+        });
+      });
+    </script>
+  </body>
+</html>
